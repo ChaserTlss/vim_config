@@ -32,6 +32,10 @@ function! s:TlistMy()
 	endif
 endfunction
 
+"Vim Markdown
+let g:vim_markdown_math = 1
+set conceallevel=2
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "My Fuction
