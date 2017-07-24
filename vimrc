@@ -2,7 +2,7 @@
 nnoremap <silent> <F8> :TlistMy<CR>
 nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
 
-
+""""""""""""""""""""""""""""""""""""""""""""""""
 "Setting
 set nu
 set showcmd
@@ -14,7 +14,9 @@ set nocompatible
 set backspace=indent,eol,start
 set completeopt=longest,menu
 
-"Function
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+"Plugin Setting And Fuction
 "taglist
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_update = 1
@@ -30,6 +32,9 @@ function! s:TlistMy()
 	endif
 endfunction
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+"My Fuction
 "Adapter 4 lenth tab with expand
 command! -nargs=0 -bar Shifttab4 call s:shifttab4()
 function! s:shifttab4()
@@ -46,11 +51,13 @@ function! s:shifttab8()
         set noexpandtab
 endfunction
 
+"Comp python
 function! s:Py3comp()
 	w
 	!python3 %;date
 endfunction
 
+"Edit Vimrc
 command -nargs=0 -bar Vimrc call s:VsEditVimrc()
 function s:VsEditVimrc()
 	:vs ~/.vim/vimrc
