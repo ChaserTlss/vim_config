@@ -1,3 +1,18 @@
+"configure Vundle
+set nocompatible 	"be iMproved
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()
+
+filetype plugin indent on
+
+"""""""""""""""""""""""""""""""""""""""""""""""
 "Mapping
 nnoremap <silent> <F8> :TlistMy<CR>
 nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
