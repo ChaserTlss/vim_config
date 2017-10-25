@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 
@@ -16,19 +16,22 @@ filetype plugin indent on
 "Mapping
 nnoremap <silent> <F8> :TlistMy<CR>
 nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
+nnoremap <silent> [b :tabprev<CR>
+nnoremap <silent> ]b :tabnext<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Setting
 set nu
 set showcmd
-set path+=~/code/CB05/kernel/include
+"set path
 set path-=/usr/include
 set scrolloff=10
 syntax on
 set nocompatible
 set backspace=indent,eol,start
 set completeopt=longest,menu
-
+set laststatus=2
+set statusline=%t%m[line:%L-%P]%=%F
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
@@ -48,7 +51,11 @@ function! s:TlistMy()
 endfunction
 
 "Vim Markdown
+let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_autowrite = 1
 set conceallevel=2
 
 
