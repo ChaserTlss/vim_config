@@ -18,13 +18,15 @@ nnoremap <silent> <F8> :TlistMy<CR>
 nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
 nnoremap <silent> [b :tabprev<CR>
 nnoremap <silent> ]b :tabnext<CR>
+nnoremap <silent> <F6> :TranslatWord<CR>
+nnoremap <silent> <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Setting
 set nu
 set showcmd
 "set path
-set path-=/usr/include
+"set path-=/usr/include
 set scrolloff=10
 syntax on
 set nocompatible
@@ -38,7 +40,7 @@ set statusline=%t%m[line:%L-%P]%=%F
 "taglist
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_update = 1
-let Tlist_WinWidth=45
+let Tlist_WinWidth=40
 command! -nargs=0 -bar TlistMy call s:TlistMy()
 function! s:TlistMy()
 	:TlistToggle
