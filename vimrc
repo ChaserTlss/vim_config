@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'nerdtree/The-NERD-tree'
 
 call vundle#end()
 
@@ -19,14 +19,12 @@ nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
 nnoremap <silent> [b :tabprev<CR>
 nnoremap <silent> ]b :tabnext<CR>
 nnoremap <silent> <F6> :TranslatWord<CR>
-nnoremap <silent> <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <silent> <F5> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Setting
 set nu
 set showcmd
-"set path
-"set path-=/usr/include
 set scrolloff=10
 syntax on
 set nocompatible
@@ -34,6 +32,8 @@ set backspace=indent,eol,start
 set completeopt=longest,menu
 set laststatus=2
 set statusline=%t%m[line:%L-%P]%=%F
+set background=dark
+let mapleader = "-"
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
@@ -59,6 +59,9 @@ let g:vim_markdown_no_default_key_mappings = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_autowrite = 1
 set conceallevel=2
+
+"nerd tree
+let NERDTreeWinPos = "right"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
