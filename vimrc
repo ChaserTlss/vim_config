@@ -1,4 +1,4 @@
-"configure Vundle
+"\configure Vundle
 set nocompatible 	"be iMproved
 filetype off
 
@@ -18,7 +18,7 @@ nnoremap <silent> <F8> :TlistMy<CR>
 nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
 nnoremap <silent> [b :tabprev<CR>
 nnoremap <silent> ]b :tabnext<CR>
-nnoremap <silent> <F6> :TranslatWord<CR>
+nnoremap <silent> <F6> :!dict_my <cword> \| head -n 1<CR>
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
