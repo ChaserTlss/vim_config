@@ -12,15 +12,6 @@ call vundle#end()
 
 filetype plugin indent on
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-"Mapping
-nnoremap <silent> <F8> :TlistMy<CR>
-nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
-nnoremap <silent> [b :tabprev<CR>
-nnoremap <silent> ]b :tabnext<CR>
-nnoremap <silent> <F6> :!dict_my <cword> \| head -n 1<CR>
-nnoremap <silent> <F5> :NERDTreeToggle<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Setting
 set nu
@@ -34,6 +25,15 @@ set laststatus=2
 set statusline=%t%m[line:%L-%P]%=%F
 set background=dark
 let mapleader = "-"
+
+"""""""""""""""""""""""""""""""""""""""""""""""
+"Mapping
+nnoremap <silent> <F8> :TlistMy<CR>
+nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
+nnoremap <silent> [b :tabprev<CR>
+nnoremap <silent> ]b :tabnext<CR>
+nnoremap <silent> <F6> :!dict_my <cword> \| head -n 1<CR>
+nnoremap <silent> <F5> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
@@ -62,7 +62,6 @@ set conceallevel=2
 
 "nerd tree
 let NERDTreeWinPos = "right"
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "My Fuction
