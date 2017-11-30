@@ -92,3 +92,20 @@ command -nargs=0 -bar Vimrc call s:VsEditVimrc()
 function s:VsEditVimrc()
 	:vs ~/.vim/vimrc
 endfunction
+
+"Return the select word
+function! SelectWord(type)
+	let old_container_unname_register = @@
+
+	if a:type ==# 'char'
+		execute "normal! `[v`]y"
+	elseif a:type ==# 'v'
+		execute "normal! `<v`>y"
+	else
+		echom "chaser GrepOperator get type " . a:type
+		let @@ = ""
+	endif
+	let new_container_unname_register = @@
+	let @@ = old_container_unname_register
+	return new_container_unname_register
+endfunction
