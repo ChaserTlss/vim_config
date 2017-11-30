@@ -34,6 +34,8 @@ nnoremap <silent> [b :tabprev<CR>
 nnoremap <silent> ]b :tabnext<CR>
 nnoremap <silent> <F6> :!dict_my <cword> \| head -n 1<CR>
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
+nnoremap <silent> ]c :cnext<CR>
+nnoremap <silent> [c :cprevious<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
