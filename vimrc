@@ -7,6 +7,9 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'nerdtree/The-NERD-tree'
+Plugin 'potion-sup/potion'
+Plugin 'Python-sup/chaserPython'
+Plugin 'Python-dic/pydiction'
 
 call vundle#end()
 
@@ -14,6 +17,7 @@ filetype plugin indent on
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Setting
+filetype plugin on
 set nu
 set showcmd
 set scrolloff=10
@@ -25,17 +29,17 @@ set laststatus=2
 set statusline=%t%m[line:%L-%P]%=%F
 set background=dark
 let mapleader = "-"
+let g:com_chaser_buf_name = "__command_buf__"
 
 """""""""""""""""""""""""""""""""""""""""""""""
 "Mapping
-nnoremap <silent> <F8> :TlistMy<CR>
-nnoremap <silent> <F7> :call <SID>Py3comp()<CR>
 nnoremap <silent> [b :tabprev<CR>
 nnoremap <silent> ]b :tabnext<CR>
-nnoremap <silent> <F6> :!dict_my <cword> \| head -n 1<CR>
-nnoremap <silent> <F5> :NERDTreeToggle<CR>
-nnoremap <silent> ]c :cnext<CR>
 nnoremap <silent> [c :cprevious<CR>
+nnoremap <silent> ]c :cnext<CR>
+nnoremap <silent> <F5> :NERDTreeToggle<CR>
+nnoremap <silent> <F7> :call <SID>Command()<CR>
+nnoremap <silent> <F8> :call <SID>TlistMy()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
@@ -43,7 +47,6 @@ nnoremap <silent> [c :cprevious<CR>
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_update = 1
 let Tlist_WinWidth=40
-command! -nargs=0 -bar TlistMy call s:TlistMy()
 function! s:TlistMy()
 	:TlistToggle
 	let chaser_TlistToggle = &updatetime
@@ -65,6 +68,10 @@ set conceallevel=2
 "nerd tree
 let NERDTreeWinPos = "right"
 
+"pydiction
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 3
+
 """"""""""""""""""""""""""""""""""""""""""""""""
 "My Fuction
 "Adapter 4 lenth tab with expand
@@ -83,11 +90,37 @@ function! s:shifttab8()
         set noexpandtab
 endfunction
 
-"Comp python
-function! s:Py3comp()
-	w
-	!python3 %;date
+"Comp
+function! s:Command()
+
+	if !(exists("b:com_chaser_command"))
+		echom "disable command: no define the com_chaser_command"
+		return
+	endif
+	if !(exists("b:com_chaser_commandoutline"))
+		let b:com_chaser_commandoutline = "CommandOutLine"
+	endif
+
+	let oldBuffName = bufname("%")
+	let commandInfo = system(b:com_chaser_command . " " . bufname("%"))
+	let filetype = b:com_chaser_commandoutline
+
+	let buffNumber = bufwinnr(g:com_chaser_buf_name)
+	if buffNumber ==# -1
+		execute "topleft " . "20split" . " " . g:com_chaser_buf_name
+		execute "setlocal filetype=" . escape(filetype, "")
+		setlocal buftype=nofile
+		call append(0, split(commandInfo, '\v\n'))
+		normal! Gdd
+	else
+		execute buffNumber . " wincmd w"
+		let bufLine = line("$")
+		call append(bufLine, split(commandInfo, '\v\n'))
+	endif
+	let oldBuffNumber = bufwinnr(oldBuffName)
+	execute oldBuffNumber . " wincmd w"
 endfunction
+
 
 "Edit Vimrc
 command -nargs=0 -bar Vimrc call s:VsEditVimrc()
