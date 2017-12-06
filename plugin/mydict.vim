@@ -1,6 +1,6 @@
 "nnoremap <silent> <F6> :!dict_my <cword> \| head -n 1<CR>
 nnoremap <silent> <leader>d :set operatorfunc=<SID>MyDict<CR>g@
-vnoremap <silent> <leader>d :<c-u>call <SIG>MyDict(visualmode())<CR>
+vnoremap <silent> <leader>d :<c-u>call <SID>MyDict(visualmode())<CR>
 
 if !exists("g:com_chaser_dict")
 	let g:com_chaser_dict = 1
@@ -12,8 +12,8 @@ endif
 function! s:MyDict(type)
 	let selectWord = SelectWord(a:type)
 	"call shell command translate the word
-	let systemOut = system(g:com_chaser_dict_shell_command
-				\. selectWord . g:com_chaser_dict_shell_flag)
+	let systemOut = selectWord . system(g:com_chaser_dict_shell_command
+				\. shellescape(selectWord) . g:com_chaser_dict_shell_flag)
 
 	"if buff no exist then create one
 	let buffNumber = bufwinnr("__dict_buff__")

@@ -1,5 +1,5 @@
 nnoremap <silent> <leader>g :set operatorfunc=<SID>GrepOperator<CR>g@
-vnoremap <leader>g :<c-u>call <SIG>GrepOperator(visualmode())<CR>
+vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<CR>
 
 function! s:GrepOperator(type)
 	let selectWord = SelectWord(a:type)
