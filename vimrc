@@ -10,6 +10,8 @@ Plugin 'nerdtree/The-NERD-tree'
 Plugin 'potion-sup/potion'
 Plugin 'Python-sup/chaserPython'
 Plugin 'Python-dic/pydiction'
+Plugin 'pythondoc/pydoc.vim'
+Plugin 'fugitive/fugitive.vim'
 
 call vundle#end()
 
@@ -28,8 +30,10 @@ set completeopt=longest,menu
 set laststatus=2
 set statusline=%t%m[line:%L-%P]%=%F
 set background=dark
-let mapleader = "-"
+let mapleader = " "
 let g:com_chaser_buf_name = "__command_buf__"
+let g:python_recommended_style=0
+set pythonthreedll=libpython3.5m.so.1
 
 """""""""""""""""""""""""""""""""""""""""""""""
 "Mapping
@@ -92,7 +96,6 @@ endfunction
 
 "Comp
 function! s:Command()
-
 	if !(exists("b:com_chaser_command"))
 		echom "disable command: no define the com_chaser_command"
 		return
@@ -101,14 +104,17 @@ function! s:Command()
 		let b:com_chaser_commandoutline = "CommandOutLine"
 	endif
 
+	:w
+
 	let oldBuffName = bufname("%")
 	let commandInfo = system(b:com_chaser_command . " " . bufname("%"))
 	let filetype = b:com_chaser_commandoutline
 
 	let buffNumber = bufwinnr(g:com_chaser_buf_name)
 	if buffNumber ==# -1
-		execute "topleft " . "20split" . " " . g:com_chaser_buf_name
+		execute "botright " . "25vsplit" . " " . g:com_chaser_buf_name
 		execute "setlocal filetype=" . escape(filetype, "")
+		execute "setlocal nonu"
 		setlocal buftype=nofile
 		call append(0, split(commandInfo, '\v\n'))
 		normal! Gdd
@@ -116,6 +122,7 @@ function! s:Command()
 		execute buffNumber . " wincmd w"
 		let bufLine = line("$")
 		call append(bufLine, split(commandInfo, '\v\n'))
+		normal! G
 	endif
 	let oldBuffNumber = bufwinnr(oldBuffName)
 	execute oldBuffNumber . " wincmd w"
@@ -124,7 +131,7 @@ endfunction
 
 "Edit Vimrc
 command -nargs=0 -bar Vimrc call s:VsEditVimrc()
-function s:VsEditVimrc()
+function! s:VsEditVimrc()
 	:vs ~/.vim/vimrc
 endfunction
 
