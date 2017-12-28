@@ -5,17 +5,12 @@ vnoremap <silent> <leader>d :<c-u>call <SID>MyDict(visualmode())<CR>
 if !exists("g:com_chaser_dict")
 	let g:com_chaser_dict = 1
 	let g:com_chaser_dict_shell_command = "dict_my "
-	let g:com_chaser_dict_shell_flag = " 2>&1 \| head -n 1 2>&1"
 	let g:com_chaser_ditc_height = 10
 endif
 
-function! s:MyDict(type)
-	let selectWord = SelectWord(a:type)
-	"call shell command translate the word
-	let systemOut = selectWord . system(g:com_chaser_dict_shell_command
-				\. shellescape(selectWord) . g:com_chaser_dict_shell_flag)
-
+function! s:InputMessageToBuf(messge)
 	"if buff no exist then create one
+	let oldBuffName = bufname("%")
 	let buffNumber = bufwinnr("__dict_buff__")
 	if buffNumber ==# -1
 		execute "botright " . g:com_chaser_ditc_height  
@@ -29,5 +24,19 @@ function! s:MyDict(type)
 
 	"append the word translate info to buf end
 	let bufLine = line("$")
-	call append(bufLine, split(systemOut, '\v\n'))
+	call append(bufLine, a:messge)
+	let oldBuffNumber = bufwinnr(oldBuffName)
+	execute oldBuffNumber . " wincmd w"
+endfunction
+
+function! s:ChannelCallBack(channel)
+	call <SID>InputMessageToBuf(ch_read(a:channel))
+endfunction
+
+function! s:MyDict(type)
+	let selectWord = SelectWord(a:type)
+	"call shell command translate the word
+	let systemIn = g:com_chaser_dict_shell_command. selectWord
+	let FunctionCall = function('s:ChannelCallBack')
+	let job = job_start(systemIn,{'close_cb':FunctionCall})
 endfunction
