@@ -107,7 +107,7 @@ function! s:Command()
 	:w
 
 	let oldBuffName = bufname("%")
-	let commandInfo = system(b:com_chaser_command . " " . bufname("%"))
+	let systemOut = system(b:com_chaser_command . " " . bufname("%"))
 	let filetype = b:com_chaser_commandoutline
 
 	let buffNumber = bufwinnr(g:com_chaser_buf_name)
@@ -116,12 +116,12 @@ function! s:Command()
 		execute "setlocal filetype=" . escape(filetype, "")
 		execute "setlocal nonu"
 		setlocal buftype=nofile
-		call append(0, split(commandInfo, '\v\n'))
+		call append(0, split(systemOut, '\v\n'))
 		normal! Gdd
 	else
 		execute buffNumber . " wincmd w"
 		let bufLine = line("$")
-		call append(bufLine, split(commandInfo, '\v\n'))
+		call append(bufLine, split(systemOut, '\v\n'))
 		normal! G
 	endif
 	let oldBuffNumber = bufwinnr(oldBuffName)
