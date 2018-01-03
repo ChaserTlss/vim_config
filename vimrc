@@ -12,25 +12,29 @@ Plugin 'Python-sup/chaserPython'
 Plugin 'Python-dic/pydiction'
 Plugin 'pythondoc/pydoc.vim'
 Plugin 'fugitive/fugitive.vim'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 
 filetype plugin indent on
 
 """"""""""""""""""""""""""""""""""""""""""""""""
+
 "Setting
+let &tags = &tags.",".findfile("tags",".;")
 filetype plugin on
 set nu
 set showcmd
 set scrolloff=10
 syntax on
-set nocompatible
+set hlsearch
+"set nocompatible
 set backspace=indent,eol,start
 set completeopt=longest,menu
 set laststatus=2
 set statusline=%t%m[line:%L-%P]%=%F
 set background=dark
-let mapleader = " "
+let mapleader = "L"
 let g:com_chaser_buf_name = "__command_buf__"
 let g:python_recommended_style=0
 set pythonthreedll=libpython3.5m.so.1
@@ -44,6 +48,7 @@ nnoremap <silent> ]c :cnext<CR>
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
 nnoremap <silent> <F7> :call <SID>Command()<CR>
 nnoremap <silent> <F8> :call <SID>TlistMy()<CR>
+nnoremap <silent> <leader>r :red<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
@@ -75,6 +80,21 @@ let NERDTreeWinPos = "right"
 "pydiction
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
+
+"YouCompleteMe
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_max_diagnostics_to_display = 1000
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_goto_buffer_command = 'vertical-split'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_detailed_diagnostics = '<leader>o'
+let g:ycm_key_invoke_completion = '<leader>i'
+let g:ycm_key_list_stop_completion = ['<leader>u']
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_log_level = 'debug'
+"let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_min_num_of_chars_for_completion = 2
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "My Fuction
