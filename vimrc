@@ -10,7 +10,6 @@ Plugin 'nerdtree/The-NERD-tree'
 Plugin 'potion-sup/potion'
 Plugin 'Python-sup/chaserPython'
 Plugin 'Python-dic/pydiction'
-Plugin 'pythondoc/pydoc.vim'
 Plugin 'fugitive/fugitive.vim'
 Plugin 'Valloric/YouCompleteMe'
 
