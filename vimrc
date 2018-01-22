@@ -34,11 +34,16 @@ set completeopt=longest,menu
 set laststatus=2
 set statusline=%t%m[line:%L-%P]%=%F
 set background=dark
-let mapleader = "L"
+let mapleader = "-"
 let g:com_chaser_buf_name = "__command_buf__"
 let g:python_recommended_style=0
 set pythonthreedll=libpython3.5m.so.1
 
+
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set smartindent
 """""""""""""""""""""""""""""""""""""""""""""""
 "Mapping
 nnoremap <silent> [b :tabprev<CR>
@@ -49,6 +54,7 @@ nnoremap <silent> <F5> :NERDTreeToggle<CR>
 nnoremap <silent> <F7> :call <SID>Command()<CR>
 nnoremap <silent> <F8> :call <SID>TlistMy()<CR>
 nnoremap <silent> <leader>r :red<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 "Plugin Setting And Fuction
@@ -84,7 +90,7 @@ let g:pydiction_menu_height = 3
 "YouCompleteMe
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_max_diagnostics_to_display = 1000
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = 'python3'
 let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_detailed_diagnostics = '<leader>o'
@@ -101,17 +107,17 @@ let g:ycm_min_num_of_chars_for_completion = 2
 "Adapter 4 lenth tab with expand
 command! -nargs=0 -bar Shifttab4 call s:shifttab4()
 function! s:shifttab4()
-        set shiftwidth=4
-	set tabstop=4 
-        set expandtab
+	setlocal shiftwidth=4
+	setlocal tabstop=4
+	setlocal expandtab
 endfunction
 
 "Adapter 8 lenth tab with expand
 command! -nargs=0 -bar Shifttab8 call s:shifttab8()
 function! s:shifttab8()
-        set shiftwidth=8
-	set tabstop=8
-        set noexpandtab
+	setlocal shiftwidth=8
+	setlocal tabstop=8
+	setlocal noexpandtab
 endfunction
 
 "Comp
