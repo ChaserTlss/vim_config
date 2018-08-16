@@ -1,4 +1,3 @@
-setlocal tabstop=8
-setlocal noexpandtab
-setlocal shiftwidth=8
-setlocal cindent
+"setlocal tabstop=8
+"setlocal noexpandtab
+"setlocal cindent
